@@ -8,20 +8,13 @@ import {
   Icon,
   IconButton,
   Textarea,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-  UnorderedList,
-  ListItem,
 } from '@chakra-ui/react'
 import { BiSave, BiTrash } from 'react-icons/bi'
 import { MdAdd, MdInfoOutline } from 'react-icons/md'
 import { useLiveQuery } from 'dexie-react-hooks'
 import Header from './components/header'
+import Footer from './components/footer'
+import Information from './components/information'
 import { db } from './libs/dexie'
 import { Memo } from './types'
 
@@ -80,8 +73,8 @@ function App() {
     <>
       <Header />
       <main>
-        <Box px={4} py={2}>
-          <HStack h="calc(100vh - 64px)">
+        <Box px={4}>
+          <HStack h="calc(100vh - 80px)">
             <VStack
               w="320px"
               h="100%"
@@ -137,11 +130,7 @@ function App() {
             </VStack>
             <VStack h="100%" w="100%">
               <Flex justify="space-between" w="100%">
-                <IconButton
-                  visibility="hidden"
-                  aria-label="Popover dummy"
-                  icon={<Icon as={MdInfoOutline} w={6} h={6} />}
-                />
+                <IconButton visibility="hidden" aria-label="Dummy" />
                 <HStack>
                   <Text color="gray.100">
                     {memo?.updatedAt.toLocaleString()}
@@ -154,31 +143,7 @@ function App() {
                     onClick={() => saveMemo(memo?.id)}
                   />
                 </HStack>
-                <Popover>
-                  <PopoverTrigger>
-                    <IconButton
-                      variant="outline"
-                      colorScheme="gray"
-                      aria-label="Popover"
-                      icon={
-                        <Icon as={MdInfoOutline} w={6} h={6} color="gray.100" />
-                      }
-                    />
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverCloseButton />
-                    <PopoverHeader>Browser Notepadについて</PopoverHeader>
-                    <PopoverBody>
-                      <UnorderedList>
-                        <ListItem>ブラウザで動作するオンラインメモ帳</ListItem>
-                        <ListItem>複数メモ対応(PCのみ)</ListItem>
-                        <ListItem>データはブラウザ(IndexedDB)に保存</ListItem>
-                        <ListItem>送信機能なし</ListItem>
-                      </UnorderedList>
-                    </PopoverBody>
-                  </PopoverContent>
-                </Popover>
+                <Information />
               </Flex>
               <Textarea
                 h="100%"
@@ -189,6 +154,7 @@ function App() {
           </HStack>
         </Box>
       </main>
+      <Footer />
     </>
   )
 }
