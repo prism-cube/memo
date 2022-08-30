@@ -18,6 +18,7 @@ import Information from './components/information'
 import { db } from './libs/dexie'
 import { Memo } from './types'
 import usePageTracking from './hooks/useTracking'
+import { formatDate, formatDateTime } from './utils/date'
 
 function App() {
   usePageTracking()
@@ -129,7 +130,7 @@ function App() {
                     {m.content.trim().split(/\n/)[0]}
                   </Text>
                   <Text color={m.id == memo?.id ? 'gray.50' : 'gray.100'}>
-                    {m.updatedAt.toLocaleDateString()}
+                    {formatDate(m.updatedAt)}
                   </Text>
                 </VStack>
               ))}
@@ -139,7 +140,7 @@ function App() {
                 <IconButton visibility="hidden" aria-label="Dummy" />
                 <HStack>
                   <Text color="gray.100">
-                    {memo?.updatedAt.toLocaleString()}
+                    {formatDateTime(memo?.updatedAt)}
                   </Text>
                   <IconButton
                     variant="outline"
