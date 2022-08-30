@@ -173,7 +173,7 @@ function App() {
                       <UnorderedList>
                         <ListItem>ブラウザで動作するオンラインメモ帳</ListItem>
                         <ListItem>複数メモ対応(PCのみ)</ListItem>
-                        <ListItem>データはブラウザ内(IndexedDB)に保存</ListItem>
+                        <ListItem>データはブラウザ(IndexedDB)に保存</ListItem>
                         <ListItem>送信機能なし</ListItem>
                       </UnorderedList>
                     </PopoverBody>
