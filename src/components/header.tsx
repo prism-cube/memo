@@ -14,7 +14,7 @@ const Header = () => {
       >
         <Box>
           <Text fontSize="lg" fontWeight="bold">
-            オンライン メモ帳
+            Browser Notepad
           </Text>
         </Box>
       </Flex>
