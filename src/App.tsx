@@ -61,6 +61,9 @@ function App() {
     const ms = await db.memos.reverse().sortBy('updatedAt')
     if (ms.length > 0) {
       setMemo(ms[0])
+    } else {
+      addMemo()
+      isSetMemo = false
     }
   }
 
