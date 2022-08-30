@@ -110,7 +110,11 @@ function App() {
                   p={2}
                   alignItems="flex-start"
                   borderRadius="lg"
-                  bg={m.id == memo?.id! ? 'yellow.500' : ''}
+                  bgImage={
+                    m.id == memo?.id!
+                      ? 'linear-gradient(150deg, rgba(221, 151, 18, 0.8) 10%, rgba(202, 163, 15, 0.8) 90%)'
+                      : ''
+                  }
                   _hover={m.id == memo?.id ? {} : { bg: 'gray.700' }}
                   cursor={m.id == memo?.id ? 'default' : 'pointer'}
                   onClick={() => changeMemo(m.id!)}
