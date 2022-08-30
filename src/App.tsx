@@ -77,7 +77,8 @@ function App() {
               w="320px"
               h="100%"
               display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-              overflow="scroll"
+              overflow="auto"
+              pr={1}
             >
               <Flex justify="space-between" w="100%">
                 <HStack>
