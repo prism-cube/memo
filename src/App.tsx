@@ -10,15 +10,18 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { BiSave, BiTrash } from 'react-icons/bi'
-import { MdAdd, MdInfoOutline } from 'react-icons/md'
+import { MdAdd } from 'react-icons/md'
 import { useLiveQuery } from 'dexie-react-hooks'
 import Header from './components/header'
 import Footer from './components/footer'
 import Information from './components/information'
 import { db } from './libs/dexie'
 import { Memo } from './types'
+import usePageTracking from './hooks/useTracking'
 
 function App() {
+  usePageTracking()
+
   const memos = useLiveQuery(() => db.memos.reverse().sortBy('updatedAt')) || []
 
   const [memo, setMemo] = useState<Memo>()
@@ -65,10 +68,6 @@ function App() {
     setMemo({ ...memo!, content: value })
   }
 
-  const [isOpen, setIsOpen] = useState<Boolean>(false)
-
-  const toggle = () => setIsOpen(!isOpen)
-
   return (
     <>
       <Header />
@@ -78,7 +77,7 @@ function App() {
             <VStack
               w="320px"
               h="100%"
-              display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+              display={{ base: 'none', md: 'block' }}
               overflow="auto"
               pr={1}
             >
