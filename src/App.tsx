@@ -18,7 +18,7 @@ import Information from './components/information'
 import { db } from './libs/dexie'
 import { Memo } from './types'
 import usePageTracking from './hooks/useTracking'
-import { formatDate, formatDateTime } from './utils/date'
+import { formatDate, equalDate } from './utils/date'
 
 function App() {
   usePageTracking()
@@ -130,7 +130,9 @@ function App() {
                     {m.content.trim().split(/\n/)[0]}
                   </Text>
                   <Text color={m.id == memo?.id ? 'gray.50' : 'gray.100'}>
-                    {formatDate(m.updatedAt)}
+                    {equalDate(m.updatedAt, new Date(), 'yyyy/MM/dd')
+                      ? formatDate(m.updatedAt, 'HH:mm')
+                      : formatDate(m.updatedAt, 'yyyy/MM/dd')}
                   </Text>
                 </VStack>
               ))}
@@ -140,7 +142,7 @@ function App() {
                 <IconButton visibility="hidden" aria-label="Dummy" />
                 <HStack>
                   <Text color="gray.100">
-                    {formatDateTime(memo?.updatedAt)}
+                    {formatDate(memo?.updatedAt, 'yyyy/MM/dd HH:mm:ss')}
                   </Text>
                   <IconButton
                     variant="outline"
