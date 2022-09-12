@@ -8,6 +8,14 @@ import {
   Icon,
   IconButton,
   Textarea,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalFooter,
+  Button,
 } from '@chakra-ui/react'
 import { BiSave, BiTrash } from 'react-icons/bi'
 import { MdAdd } from 'react-icons/md'
@@ -22,6 +30,8 @@ import { formatDate, equalDate } from './utils/date'
 
 function App() {
   usePageTracking()
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const memos = useLiveQuery(() => db.memos.reverse().sortBy('updatedAt')) || []
 
@@ -101,7 +111,7 @@ function App() {
                     colorScheme="gray"
                     aria-label="Delete memo"
                     icon={<Icon as={BiTrash} w={6} h={6} color="gray.100" />}
-                    onClick={() => deleteMemo(memo?.id)}
+                    onClick={onOpen}
                   />
                 </HStack>
               </Flex>
@@ -162,6 +172,29 @@ function App() {
             </VStack>
           </HStack>
         </Box>
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Do you want to delete this data?</ModalHeader>
+            <ModalCloseButton />
+            <ModalFooter>
+              <Button
+                colorScheme="red"
+                mr={3}
+                onClick={() => {
+                  deleteMemo(memo?.id)
+                  onClose()
+                }}
+              >
+                Delete
+              </Button>
+              <Button variant="ghost" onClick={onClose}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </main>
       <Footer />
     </>
